@@ -3,7 +3,6 @@
 
 
 class Square:
-
     """Inititalises the square with the given size"""
     def __init__(self, size=0):
         if type(size) == int and size >= 0:
@@ -13,13 +12,13 @@ class Square:
         elif size < 0:
             raise ValueError("size must be >= 0")
 
-    @property
     """Property getter to retrieve size"""
+    @property
     def size(self):
         return self.__size
 
-    @size.setter
     """Property setter to set size"""
+    @size.setter
     def size(self, value):
         if type(value) == int and value >= 0:
             self.__size = value
@@ -33,13 +32,13 @@ class Square:
         self.__size = size
         self.__position = position
 
-    @property
     """Property getter to retrieve position"""
+    @property
     def position(self):
         return self.__position
 
-    @position.setter
     """Property setter to set position"""
+    @position.setter
     def position(self, value):
         if type(position) == tuple and value >= 0:
             self.__position = value
