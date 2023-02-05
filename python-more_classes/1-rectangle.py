@@ -10,8 +10,8 @@ class Rectangle:
         """
         Initialises the rectangle with the given dimensions
         """
-        self.__height = height
-        self.__width = width
+        self.height = height
+        self.width = width
 
     @property
     def width(self):
@@ -36,7 +36,7 @@ class Rectangle:
         """
         Property getter to retrieve height
         """
-        self.__height = height
+        return self.__height
 
     @height.setter
     def height(self, value):
