@@ -25,6 +25,10 @@ class TestMaxInteger(unittest.TestCase):
         self.assertEqual(max_integer([1, 4, 8, 8, 6]), 8)
         #List with negative values
         self.assertEqual(max_integer([-5, -1, 2, 3]), 3)
+        #Backwards order list
+        self.assertEqual(max_integer([5, 4, 3, 2, 1]), 5)
+        #List of one element
+        self.assertEqual(max_integer([1]), 1)
 
 if __name__ == '__main__':
     unittest.main()
