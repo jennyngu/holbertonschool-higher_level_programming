@@ -1,0 +1,9 @@
+#!/usr/bin/python3
+def text_indentation(text):
+    if type(text) != str:
+        raise TypeError("text must be a string")
+    else:
+        text = text.replace('. ', '.\n\n')
+        text = text.replace('? ', '?\n\n')
+        text = text.replace(': ', ':\n\n')
+    print(text)
