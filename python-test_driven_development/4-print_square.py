@@ -1,5 +1,15 @@
 #!/usr/bin/python3
+"""
+Prints a square
+"""
+
+
 def print_square(size):
+    """
+    Prints a square of given size
+
+    size: size of square
+    """
     if type(size) != int:
         raise TypeError("size must be an integer")
     if size < 0:
@@ -13,5 +23,5 @@ def print_square(size):
             if j <= i:
                 print('#', end='')
             else:
-                print('#', end= '')
+                print('#', end='')
         print()
