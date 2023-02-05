@@ -83,4 +83,4 @@ class Rectangle:
         Represents the repr() func to return
         a printable representation of the given object
         """
-        return "Rectangle({},{})".format(self.__width, self.__height)
+        return "Rectangle({}, {})".format(self.__width, self.__height)
