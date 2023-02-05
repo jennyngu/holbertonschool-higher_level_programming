@@ -22,6 +22,11 @@ Using ``print_square``
     Traceback (most recent call last):
     TypeError: size must be an integer
 
+    Should print an empty line if size is 0:
+    >>> print_square(0)
+
+
+
     Should raise ValueError if size is less than 0:
     >>> print_square(-3)
     Traceback (most recent call last):
