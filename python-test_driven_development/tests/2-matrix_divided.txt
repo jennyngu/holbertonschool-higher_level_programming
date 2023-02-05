@@ -1,0 +1,66 @@
+The 2-matrix_divided module
+==========================
+
+Using the ``matrix_divided()``
+------------------------------
+
+>>> matrix_divided = __import__("2-matrix_divided").matrix_divided
+
+    Given a matrix of integers, returns a new matrix with elements divided by given number
+
+    Should print an empty matrix for empty matrix:
+    >>> matrix_divided([[]], 3)
+    [[]]
+
+    Should work for positive matrix:
+    >>> matrix_divided([[1, 2, 3], [4, 5, 6]], 3)
+    [[0.33, 0.67, 1.0], [1.33, 1.67, 2.0]]
+
+    Should work for negative matrix:
+    >>> matrix_divided([[-1, -2, -3], [-4, -5, -6]], 3)
+    [[-0.33, -0.67, -1.0], [-1.33, -1.67, -2.0]]
+
+    Should work for a single list:
+    >>> matrix_divided([[1, 2, 3]], 3)
+    [[0.33, 0.67, 1.0]]
+
+    Should work for negative matrix and div:
+    >>> matrix_divided([[-1, -2, -3], [-4, -5, -6]], -3)
+    [[0.33, 0.67, 1.0], [1.33, 1.67, 2.0]]
+
+    Should work when given an inf num:
+    >>> matrix_divided([[3, 3, 9], [3, 6, float('inf')]], 3)
+    [[1.0, 1.0, 3.0], [1.0, 2.0, inf]]
+
+    Should work when div is inf num:
+    >>> matrix_divided([[3, 3, 9], [3, 6, 9]], float('inf'))
+    [[0.0, 0.0, 0.0], [0.0, 0.0, 0.0]]
+
+    Should print raised TypeError if rows are not the same size:
+    >>> matrix_divided([[1, 2, 3], [4, 5]], 3)
+    Traceback (most recent call last):
+    TypeError: Each row of the matrix must have the same size
+
+    Should print raised TypeError if None is provided for matrix:
+    >>> matrix_divided(None, 3)
+    Traceback (most recent call last):
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+    Should print raised TypeError if matrix is not provided:
+    >>> matrix_divided([], 3)
+    Traceback (most recent call last):
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+    >>> matrix_divided([[1, 2], 3], 3)
+    Traceback (most recent call last):
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+    Should print raised TypeError if string is provided:
+    >>> matrix_divided('123', 3)
+    Traceback (most recent call last):
+    TypeError: matrix must be a matrix (list of lists) of integers/floats
+
+    Should print ZeroDivisionError is divided by 0:
+    >>> matrix_divided([[3, 3, 9], [3, 6, 9]], 0)
+    Traceback (most recent call last):
+    ZeroDivisionError: division by zero
