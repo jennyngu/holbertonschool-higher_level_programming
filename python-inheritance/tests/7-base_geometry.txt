@@ -8,6 +8,10 @@ Using ``integer_validator()``
 
     Given a value, check to see if it is a valid integer
 
+    Should not print exception errors when given valid integer:
+    >>> bg = BaseGeometry()
+    >>> bg.integer_validator("age", 1)
+
     Should raise TypeError if no parameters are given:
     >>> bg = BaseGeometry()
     >>> bg.integer_validator()
@@ -25,6 +29,31 @@ Using ``integer_validator()``
     Traceback (most recent call last):
     TypeError: float must be an integer
 
+    >>> bg = BaseGeometry()
+    >>> bg.integer_validator("age", (4,))
+    Traceback (most recent call last):
+    TypeError: age must be an integer
+
+    >>> bg = BaseGeometry()
+    >>> bg.integer_validator("age", [3])
+    Traceback (most recent call last):
+    TypeError: age must be an integer
+
+    >>> bg = BaseGeometry()
+    >>> bg.integer_validator("age", True)
+    Traceback (most recent call last):
+    TypeError: age must be an integer
+
+    >>> bg = BaseGeometry()
+    >>> bg.integer_validator("age", {3, 4})
+    Traceback (most recent call last):
+    TypeError: age must be an integer
+
+    >>> bg = BaseGeometry()
+    >>> bg.integer_validator("age", None)
+    Traceback (most recent call last):
+    TypeError: age must be an integer
+
     Should raise ValueError if value is less than or equal to 0:
     >>> bg = BaseGeometry()
     >>> bg.integer_validator("age", 0)
@@ -35,3 +64,9 @@ Using ``integer_validator()``
     >>> bg.integer_validator("distance", -4)
     Traceback (most recent call last):
     ValueError: distance must be greater than 0
+
+    Should raise error message if unimplemented area method is used:
+    >>> bg = BaseGeometry()
+    >>> bg.area()
+    Traceback (most recent call last):
+    Exception: area() is not implemented
