@@ -25,5 +25,5 @@ class Student:
             for att in attrs:
                 if hasattr(self, att):
                     attr_dict[att] = getattr(self, att)
-                    return attr_dict
+            return attr_dict
         return(self.__dict__)
