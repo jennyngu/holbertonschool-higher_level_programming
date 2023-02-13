@@ -3,6 +3,7 @@
 The base model/class used for other shapes
 """
 
+
 class Base:
     """
     A class that defines the basis of shapes
@@ -13,7 +14,7 @@ class Base:
         """
         Sets the id of an instance of Base
         """
-        if id != None:
+        if id is not None:
             self.id = id
         else:
             Base.__nb_objects = Base.__nb_objects + 1
