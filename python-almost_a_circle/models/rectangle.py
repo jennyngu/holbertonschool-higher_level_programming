@@ -89,3 +89,12 @@ class Rectangle(Base):
         Returns the area of the instance of Rectangle
         """
         return self.__width * self.__height
+
+    def display(self):
+        """
+        Prints the rectangle pattern with the '#' symbol
+        """
+        for i in range(self.__height):
+            for j in range(self.__width):
+                    print('#', end='')
+            print()
