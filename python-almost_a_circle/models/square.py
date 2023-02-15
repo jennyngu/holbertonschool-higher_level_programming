@@ -27,7 +27,7 @@ class Square(Rectangle):
             raise TypeError("width must be an integer")
         elif value <= 0:
             raise ValueError("width must be > 0")
-        self.__size = value
+        self.__width = self.__height = value
 
     def __str__(self):
         return f"[Square] ({self.id}) {self.x}/{self.y} - {self.size}"
