@@ -102,10 +102,23 @@ class Rectangle(Base):
             print('#' * self.__width, end='')
             print()
 
-    def update(self, *args):
+    def update(self, *args, **kwargs):
         """
-        Assigns an argument to the according attributes in the given order
+        Args go through *args to assign an argument to the according attributes
+        in the given order.
+        If args is given in key, value pairs, arg goes through **kwargs
         """
+        for key, value in kwargs.items():
+            if key == "width":
+                self.width = value
+            elif key == "height":
+                self.height = value
+            elif key == "x":
+                self.x = value
+            elif key == "y":
+                self.y = value
+            elif key == "id":
+                self.id = value
         if len(args) > 0:
             self.id = args[0]
         if len(args) > 1:
