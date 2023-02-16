@@ -53,5 +53,17 @@ class Square(Rectangle):
         if len(args) > 3:
             self.y = args[3]
 
+    def to_dictionary(self):
+        """
+        Returns the Square dictionary with only attribute names
+        """
+        new_dict = {
+            'id': self.id,
+            'x': self.x,
+            'size': self.size,
+            'y': self.y
+            }
+        return new_dict
+
     def __str__(self):
         return f"[Square] ({self.id}) {self.x}/{self.y} - {self.size}"
