@@ -29,32 +29,5 @@ class Square(Rectangle):
             raise ValueError("width must be > 0")
         self.width = self.height = value
 
-    def update(self, *args, **kwargs):
-        """
-        Args go through *args to assign an argument to the according attributes
-        in the given order.
-        If args is given in key, value pairs, arg goes through **kwargs
-        """
-        for key, value in kwargs.items():
-            if key == "size":
-                self.size = value
-            elif key == "x":
-                self.x = value
-            elif key == "y":
-                self.y = value
-            elif key == "id":
-                self.id = value
-        if len(args) > 0:
-            self.id = args[0]
-        if len(args) > 1:
-            self.size = args[1]
-        if len(args) > 2:
-            self.x = args[2]
-        if len(args) > 3:
-            self.y = args[3]
-
-    def to_dictionary(self):
-        return self.__dict__
-
     def __str__(self):
         return f"[Square] ({self.id}) {self.x}/{self.y} - {self.size}"
