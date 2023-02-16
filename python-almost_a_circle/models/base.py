@@ -37,7 +37,8 @@ class Base:
         of list_objs to a file
         """
         if list_objs is None:
-            dict_list = []
+            list_objs = []
+
         filename = cls.__name__ + ".json"
         with open(filename, "w", encoding="utf-8") as f:
             dict_list = []
