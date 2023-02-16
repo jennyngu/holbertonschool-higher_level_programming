@@ -46,3 +46,14 @@ class Base:
                 dict_list.append(obj.to_dictionary())
             j_string = cls.to_json_string(dict_list)
             f.write(j_string)
+
+    @staticmethod
+    def from_json_string(json_string):
+        """
+        Returns the list of the JSON string representation json_string
+        """
+        if json_string is None:
+            json_string = []
+            return json_string
+
+        return json.loads(json_string)
