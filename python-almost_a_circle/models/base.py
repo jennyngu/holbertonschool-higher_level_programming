@@ -22,10 +22,10 @@ class Base:
             self.id = Base.__nb_objects
 
     @staticmethod
-    """
-    Returns a JSON string representation of a list of dictionaries
-    """
     def to_json_string(list_dictionaries):
+        """
+        Returns a JSON string representation of a list of dictionaries
+        """
         if list_dictionaries is None or list_dictionaries == "":
             return "[]"
         return json.dumps(list_dictionaries)
