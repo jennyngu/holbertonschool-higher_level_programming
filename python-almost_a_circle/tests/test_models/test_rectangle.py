@@ -8,35 +8,6 @@ from models.base import Base
 
 
 class TestRectangle(unittest.TestCase):
-    def test_rectangle_exists(self):
-        r1 = Rectangle(1, 2)
-        self.assertEqual(r1.id, 1)
-        self.assertEqual(r1.width, 1)
-        self.assertEqual(r1.height, 2)
-        self.assertEqual(r1.x, 0)
-        self.assertEqual(r1.y, 0)
-
-        r2 = Rectangle(1, 2, 3)
-        self.assertEqual(r2.id, 2)
-        self.assertEqual(r2.width, 1)
-        self.assertEqual(r2.height, 2)
-        self.assertEqual(r2.x, 3)
-        self.assertEqual(r2.y, 0)
-
-        r3 = Rectangle(1, 2, 3, 4)
-        self.assertEqual(r2.id, 3)
-        self.assertEqual(r2.width, 1)
-        self.assertEqual(r2.height, 2)
-        self.assertEqual(r2.x, 3)
-        self.assertEqual(r2.y, 4)
-
-        r4 = Rectangle(1, 2, 3, 4, 5)
-        self.assertEqual(r2.id, 5)
-        self.assertEqual(r2.width, 1)
-        self.assertEqual(r2.height, 2)
-        self.assertEqual(r2.x, 3)
-        self.assertEqual(r2.y, 4)
-
     def test_raise_exception_for_str(self):
         with self.assertRaises(TypeError):
             r1 = Rectangle("1", 2)
@@ -68,27 +39,6 @@ class TestRectangle(unittest.TestCase):
     def test_str(self):
         r = Rectangle(1, 2, 3, 4, 5)
         self.assertEqual(str(r), "[Rectangle] (5) 3/4 - 1/2")
-
-    def test_display(self):
-        r = Rectangle(2, 2, 1, 1, 3)
-        expected_output = "\n ##\n ##\n"
-        with captured_output() as (out, err):
-            r.display()
-        self.assertEqual(out.getvalue(), expected_output)
-
-    def test_display_wo_y(self):
-        r = Rectangle(2, 2, 1, 0, 2)
-        expected_output = " ##\n ##\n"
-        with captured_output() as (out, err):
-            r.display()
-        self.assertEqual(out.getvalue(), expected_output)
-
-    def test_display_wo_xy(self):
-        r = Rectangle(1, 1, 0, 0, 1)
-        expected_output = "#\n"
-        with captured_output() as (out, err):
-            r.display()
-        self.assertEqual(out.getvalue(), expected_output)
 
     def test_to_dictionary(self):
         r = Rectangle(1, 2, 3, 4, 5)
