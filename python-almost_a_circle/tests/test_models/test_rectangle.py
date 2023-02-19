@@ -10,13 +10,32 @@ from models.base import Base
 class TestRectangle(unittest.TestCase):
     def test_rectangle_exists(self):
         r1 = Rectangle(1, 2)
-        self.assertIsInstance(r1, Rectangle)
+        self.assertEqual(r1.id, 1)
+        self.assertEqual(r1.width, 1)
+        self.assertEqual(r1.height, 2)
+        self.assertEqual(r1.x, 0)
+        self.assertEqual(r1.y, 0)
+
         r2 = Rectangle(1, 2, 3)
-        self.assertIsInstance(r2, Rectangle)
+        self.assertEqual(r2.id, 2)
+        self.assertEqual(r2.width, 1)
+        self.assertEqual(r2.height, 2)
+        self.assertEqual(r2.x, 3)
+        self.assertEqual(r2.y, 0)
+
         r3 = Rectangle(1, 2, 3, 4)
-        self.assertIsInstance(r3, Rectangle)
+        self.assertEqual(r2.id, 3)
+        self.assertEqual(r2.width, 1)
+        self.assertEqual(r2.height, 2)
+        self.assertEqual(r2.x, 3)
+        self.assertEqual(r2.y, 4)
+
         r4 = Rectangle(1, 2, 3, 4, 5)
-        self.assertIsInstance(r4, Rectangle)
+        self.assertEqual(r2.id, 5)
+        self.assertEqual(r2.width, 1)
+        self.assertEqual(r2.height, 2)
+        self.assertEqual(r2.x, 3)
+        self.assertEqual(r2.y, 4)
 
     def test_raise_exception_for_str(self):
         with self.assertRaises(TypeError):
@@ -44,37 +63,138 @@ class TestRectangle(unittest.TestCase):
 
     def test_area(self):
         r = Rectangle(1, 2)
-        self.assertTrue(hasattr(r, "area"))
+        self.assertEqual(r.area(), 2)
 
     def test_str(self):
-        r = Rectangle(1, 2)
-        self.assertTrue(hasattr(r, "__str__"))
+        r = Rectangle(1, 2, 3, 4, 5)
+        self.assertEqual(str(r), "[Rectangle] (5) 3/4 - 1/2")
 
     def test_display(self):
-        r = Rectangle(1, 2)
-        self.assertTrue(hasattr(r, "display"))
+        r = Rectangle(2, 2, 1, 1, 3)
+        expected_output = "\n ##\n ##\n"
+        with captured_output() as (out, err):
+            r.display()
+        self.assertEqual(out.getvalue(), expected_output)
 
-    def test_display_w_x_and_y_exists(self):
-        r = Rectangle(1, 2, 3, 4)
-        self.assertTrue(hasattr(r, "display"))
+    def test_display_wo_y(self):
+        r = Rectangle(2, 2, 1, 0, 2)
+        expected_output = " ##\n ##\n"
+        with captured_output() as (out, err):
+            r.display()
+        self.assertEqual(out.getvalue(), expected_output)
 
-    def test_display_wo_y_exists(self):
-        r = Rectangle(1, 2, 3)
-        self.assertTrue(hasattr(r, "display"))
+    def test_display_wo_xy(self):
+        r = Rectangle(1, 1, 0, 0, 1)
+        expected_output = "#\n"
+        with captured_output() as (out, err):
+            r.display()
+        self.assertEqual(out.getvalue(), expected_output)
 
     def test_to_dictionary(self):
+        r = Rectangle(1, 2, 3, 4, 5)
+        expected_output = {'x': 3, 'y': 4, 'id': 5, 'height': 2, 'width': 1}
+        self.assertEqual(r.to_dictionary(), expected_output)
+
+    def test_update_no_args(self):
+        r = Rectangle(10, 20, 30, 40, 50)
+        r.update()
+        self.assertEqual(str(r), "[Rectangle] (50) 30/40 - 10/20")
+
+    def test_update_1arg(self):
+        r = Rectangle(1, 1, 0, 0, 1)
+        r.update(2)
+        self.assertEqual(str(r), "[Rectangle] (2) 0/0 - 1/1")
+
+    def test_update_2args(self):
+        r = Rectangle(1, 1, 0, 0, 1)
+        r.update(2, 2)
+        self.assertEqual(str(r), "[Rectangle] (2) 0/0 - 2/1")
+
+    def test_update_3args(self):
+        r = Rectangle(1, 1, 0, 0, 1)
+        r.update(2, 2, 2)
+        self.assertEqual(str(r), "[Rectangle] (2) 0/0 - 2/2")
+
+    def test_update_4_args(self):
+        r = Rectangle(1, 1, 0, 0, 1)
+        r.update(2, 2, 2, 2)
+        self.assertEqual(str(r), "[Rectangle] (2) 2/0 - 2/2")
+
+    def test_update_5args(self):
+        r = Rectangle(1, 1, 0, 0, 1)
+        r.update(2, 2, 2, 2, 2)
+        self.assertEqual(str(r), "[Rectangle] (2) 2/2 - 2/2")
+
+    def test_update_id(self):
+        r = Rectangle(1, 1)
+        r.update(**{'id': 89})
+        self.assertEqual(r.id, 89)
+
+    def test_update_id_width(self):
+        r = Rectangle(1, 1)
+        r.update(**{'id': 89, 'width': 1})
+        self.assertEqual(r.id, 89)
+        self.assertEqual(r.width, 1)
+
+    def test_update_id_width_height(self):
+        r = Rectangle(1, 1)
+        r.update(**{'id': 89, 'width': 1, 'height': 2})
+        self.assertEqual(r.id, 89)
+        self.assertEqual(r.width, 1)
+        self.assertEqual(r.height, 2)
+
+    def test_update_id_width_height_x(self):
+        r = Rectangle(1, 1)
+        r.update(**{'id': 89, 'width': 1, 'height': 2, 'x': 3})
+        self.assertEqual(r.id, 89)
+        self.assertEqual(r.width, 1)
+        self.assertEqual(r.height, 2)
+        self.assertEqual(r.x, 3)
+
+    def test_update_id_width_height_x_y(self):
+        r = Rectangle(1, 1)
+        r.update(**{'id': 89, 'width': 1, 'height': 2, 'x': 3, 'y': 4})
+        self.assertEqual(r.id, 89)
+        self.assertEqual(r.width, 1)
+        self.assertEqual(r.height, 2)
+        self.assertEqual(r.x, 3)
+        self.assertEqual(r.y, 4)
+
+    def test_create_id(self):
+        r = Rectangle.create(**{'id': 89})
+        self.assertEqual(r.id, 89)
+
+    def test_create_id_width(self):
+        r = Rectangle.create(**{'id': 89, 'width': 1})
+        self.assertEqual(r.id, 89)
+        self.assertEqual(r.width, 1)
+
+    def test_create_id_width_height(self):
+        r = Rectangle.create(**{'id': 89, 'width': 1, 'height': 2})
+        self.assertEqual(r.id, 89)
+        self.assertEqual(r.width, 1)
+        self.assertEqual(r.height, 2)
+
+    def test_create_id_width_height_x(self):
+        r = Rectangle.create(**{'id': 89, 'width': 1, 'height': 2, 'x': 3})
+        self.assertEqual(r.id, 89)
+        self.assertEqual(r.width, 1)
+        self.assertEqual(r.height, 2)
+        self.assertEqual(r.x, 3)
+
+    def test_create_id_width_height_x_y(self):
+        r = Rectangle.create(**{'id': 89, 'width': 1, 'height': 2, 'x': 3, 'y': 4})
+        self.assertEqual(r.id, 89)
+        self.assertEqual(r.width, 1)
+        self.assertEqual(r.height, 2)
+        self.assertEqual(r.x, 3)
+        self.assertEqual(r.y, 4)
+
+    def test_save_to_file_empty_list(self):
+        Rectangle.save_to_file([])
+        with open("Rectangle.json", "r") as f:
+            self.assertEqual(f.read(), "[]")
+
+    def test_save_to_file_list(self):
         r = Rectangle(1, 2)
-        self.assertTrue(hasattr(r, "to_dictionary"))
-
-    def test_update(self):
-        r = Rectangle(1, 2)
-        self.assertTrue(hasattr(r, "update"))
-
-    def test_create(self):
-        self.assertTrue(hasattr(Rectangle, "create"))
-
-    def test_save_to_file(self):
-        self.assertTrue(hasattr(Rectangle, "save_to_file"))
-
-    def test_load_from_file(self):
-        self.assertTrue(hasattr(Rectangle, "load_from_file"))
+        Rectangle.save_to_file([r])
