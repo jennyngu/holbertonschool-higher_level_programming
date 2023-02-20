@@ -10,6 +10,18 @@ class Rectangle(Base):
     Defines a Rectangle
     """
     def __init__(self, width, height, x=0, y=0, id=None):
+        if type(width) != int:
+            raise TypeError("width must be an integer")
+        elif width <= 0:
+            raise ValueError("width must be > 0")
+        self.__width = width
+
+        if type(height) != int:
+            raise TypeError("height must be an integer")
+        elif height <= 0:
+            raise ValueError("height must be > 0")
+        self.__height = height
+
         if type(x) != int:
             raise TypeError("x must be an integer")
         elif x < 0:
@@ -23,18 +35,6 @@ class Rectangle(Base):
         self.__y = y
 
         super().__init__(id)
-
-        if type(height) != int:
-            raise TypeError("height must be an integer")
-        elif height <= 0:
-            raise ValueError("height must be > 0")
-        self.__height = height
-
-        if type(width) != int:
-            raise TypeError("width must be an integer")
-        elif width <= 0:
-            raise ValueError("width must be > 0")
-        self.__width = width
 
     @property
     def width(self):
@@ -135,9 +135,13 @@ class Rectangle(Base):
         Returns the Rectangle dictionary with only attribute names
         ie. no class name
         """
-        new_dict = self.__dict__.copy()
-        new_names = ['x', 'y', 'id', 'height', 'width']
-        new_dict = dict(zip(new_names, list(new_dict.values())))
+        new_dict = {
+            'id': self.id,
+            'width': self.width,
+            'height': self.height,
+            'x': self.x,
+            'y': self.y
+            }
         return new_dict
 
     def __str__(self):
