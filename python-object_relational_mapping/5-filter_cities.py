@@ -20,11 +20,14 @@ if __name__ == "__main__":
                     WHERE states.name=%s", (state_name, ))
     rows = cursor.fetchall()
 
-    for row in range(len(rows)):
-        if row == len(rows) - 1:
-            print(rows[row][0])
-        else:
-            print(rows[row][0], end=', ')
+    if rows == 0:
+        print()
+    else:
+        for row in range(len(rows)):
+            if row == len(rows) - 1:
+                print(rows[row][0])
+            else:
+                print(rows[row][0], end=', ')
 
     cursor.close()
     db.close()
