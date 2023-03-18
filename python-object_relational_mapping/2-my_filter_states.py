@@ -15,7 +15,7 @@ if __name__ == "__main__":
                          port=3306)
     state_name = sys.argv[4]
     cursor = db.cursor()
-    cursor.execute("SELECT * FROM states WHERE name='{}'".format(state_name))
+    cursor.execute("SELECT * FROM states WHERE BINARY name='{}'".format(state_name))
     rows = cursor.fetchall()
 
     for row in rows:
