@@ -3,7 +3,7 @@ const args = process.argv.slice(2);
 let secondBiggest = -Infinity;
 let array = [];
 
-if (args[2] === undefined || args[2] === 1) {
+if (args.length < 2) {
   secondBiggest = 0;
 } else {
   array = args.sort((a, b) => b - a);
