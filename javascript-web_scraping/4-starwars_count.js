@@ -3,10 +3,16 @@
 const request = require('request');
 const searchWA = 'https://swapi-api.hbtn.io/api/people/18/';
 const url = process.argv[2];
-request(url, (error, response, body) => {
-  if (error) console.log(error);
+
+request(url, function (error, response, body) {
+  if (error) {
+    console.log(error);
+    return;
+  }
+
   const bodyInfo = JSON.parse(body);
   const results = bodyInfo.results;
+
   let count = 0;
   for (let i = 0; i < results.length; i++) {
     const characters = results[i].characters;
