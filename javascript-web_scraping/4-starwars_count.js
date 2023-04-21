@@ -1,18 +1,20 @@
 #!/usr/bin/node
 
 const request = require('request');
-const charId = 'https://swapi-api.hbtn.io/api/people/18/';
+const searchWA = '/18/';
 const url = process.argv[2];
-
-request(url, function (error, response, body) {
-  if (error) {
-    console.error(error);
-    return;
+request(url, (error, response, body) => {
+  if (error) console.log(error);
+  const bodyInfo = JSON.parse(body);
+  const results = bodyInfo.results;
+  let count = 0;
+  for (const i in results) {
+    const characters = results[i].characters;
+    for (const char in characters) {
+      if (characters[char].includes(searchWA)) {
+        count = count + 1;
+      }
+    }
   }
-  const films = JSON.parse(body).results;
-  const count = films.filter((film) =>
-    film.characters.includes(charId)
-  ).length;
-
   console.log(count);
 });
